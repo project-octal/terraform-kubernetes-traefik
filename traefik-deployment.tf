@@ -58,10 +58,10 @@ resource "kubernetes_deployment" "traefik_deployment" {
                 expiration_seconds = 7200
                 audience = "api"
               }
+              config_map {
+                name = kubernetes_config_map.traefik_config_map.metadata.0.name
+              }
             }
-          }
-          config_map {
-            name = kubernetes_config_map.traefik_config_map.metadata.0.name
           }
         }
       }
