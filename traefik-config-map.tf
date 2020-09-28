@@ -9,6 +9,6 @@ resource "kubernetes_config_map" "traefik_config_map" {
     annotations = {}
   }
   data = {
-    "ca.crt"     = base64decode(var.kubernetes_cluster_base64_ca_certificate)
+    "ca.crt" = base64decode(var.kubernetes_cluster_base64_ca_certificate)
   }
 }

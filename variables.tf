@@ -1,6 +1,6 @@
 variable "kubernetes_cluster_base64_ca_certificate" {
-    type = string
-    description = "The target clusters base64 encoded CA certificate"
+  type        = string
+  description = "The target clusters base64 encoded CA certificate"
 }
 variable "namespace" {
   type        = string

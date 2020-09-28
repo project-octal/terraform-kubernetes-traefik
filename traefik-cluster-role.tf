@@ -19,8 +19,8 @@ resource "kubernetes_cluster_role" "traefik_cluster_role" {
   }
   rule {
     api_groups = ["extensions"]
-    resources = ["ingresses/status"]
-    verbs = ["update"]
+    resources  = ["ingresses/status"]
+    verbs      = ["update"]
   }
 }
 
