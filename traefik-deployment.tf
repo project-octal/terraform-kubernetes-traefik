@@ -48,17 +48,26 @@ resource "kubernetes_deployment" "traefik_deployment" {
             mount_path = "/var/run/secrets/kubernetes.io/serviceaccount/"
             read_only = true
           }
+          volume_mount {
+            name = "traefik-config"
+            mount_path = "/var/run/secrets/kubernetes.io/serviceaccount/"
+          }
+        }
+        volume {
+          name = "traefik-config"
+          config_map {
+            name = kubernetes_config_map.traefik_config_map.metadata.0.name
+          }
         }
         volume {
           name = "service-account-token"
           projected {
-
             sources {
               service_account_token {
-                path = "token" #kubernetes_service_account.traefik_service_account.metadata.0.name
+                path = "token"
                 expiration_seconds = 7200
                 audience = "api"
-              } 
+              }
             }
           }
         }
