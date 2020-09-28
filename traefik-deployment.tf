@@ -25,12 +25,12 @@ resource "kubernetes_deployment" "traefik_deployment" {
         service_account_name             = "traefik-ingress"
         termination_grace_period_seconds = 60
         container {
-          name = "traefik-ingress"
+          name              = "traefik-ingress"
           image             = "${var.image_repository}/${var.traefik_image}:${var.traefik_image_tag}"
           image_pull_policy = var.image_pull_policy
           args = [
             "--api",
-            "--kubernetes",
+            "--providers.kubernetesingress=true",
             "--logLevel=${var.traefik_log_level}"
           ]
           port {
