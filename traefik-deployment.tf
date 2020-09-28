@@ -15,6 +15,9 @@ resource "kubernetes_deployment" "traefik_deployment" {
         "app.kubernetes.io/name" : "traefik-ingress"
       }
     }
+    strategy {
+      type = "Recreate"
+    }
     template {
       metadata {
         labels = merge({
