@@ -32,7 +32,7 @@ resource "kubernetes_deployment" "traefik_deployment" {
             "--api=true",
             "--providers.kubernetesingress=true",
             "--log=true",
-            "--log.format=json"
+            "--log.format=json",
             "--log.level=${var.traefik_log_level}"
           ]
           port {
