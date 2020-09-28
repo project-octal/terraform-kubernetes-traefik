@@ -29,9 +29,11 @@ resource "kubernetes_deployment" "traefik_deployment" {
           image             = "${var.image_repository}/${var.traefik_image}:${var.traefik_image_tag}"
           image_pull_policy = var.image_pull_policy
           args = [
-            "--api",
+            "--api=true",
             "--providers.kubernetesingress=true",
-            "--logLevel=${var.traefik_log_level}"
+            "--log=true",
+            "--log.format=json"
+            "--log.level=${var.traefik_log_level}"
           ]
           port {
             name           = "http"
