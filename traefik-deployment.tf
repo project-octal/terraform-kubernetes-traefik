@@ -15,9 +15,6 @@ resource "kubernetes_deployment" "traefik_deployment" {
         "app.kubernetes.io/name" : "traefik-ingress"
       }
     }
-    strategy {
-      type = "Recreate"
-    }
     template {
       metadata {
         labels = merge({
@@ -26,6 +23,7 @@ resource "kubernetes_deployment" "traefik_deployment" {
       }
       spec {
         service_account_name             = kubernetes_service_account.traefik_service_account.metadata.0.name
+        ser
         termination_grace_period_seconds = 60
         container {
           name              = "traefik-ingress"
