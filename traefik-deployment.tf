@@ -31,7 +31,7 @@ resource "kubernetes_deployment" "traefik_deployment" {
           args = [
             "--api=true",
             "--providers.kubernetesingress=true",
-            "--providers.kubernetesingress.namespaces=${kubernetes_namespace.traefik_namespace.metadata.0.name}"
+            "--providers.kubernetesingress.namespaces=${kubernetes_namespace.traefik_namespace.metadata.0.name}",
             "--log=true",
             "--log.format=json",
             "--log.level=${var.traefik_log_level}"
