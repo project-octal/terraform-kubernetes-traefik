@@ -22,7 +22,7 @@ resource "kubernetes_deployment" "traefik_deployment" {
         }, local.labels)
       }
       spec {
-        service_account_name             = "traefik-ingress"
+        service_account_name             = kubernetes_service_account.traefik_service_account.metadata.0.name
         termination_grace_period_seconds = 60
         container {
           name              = "traefik-ingress"
@@ -43,8 +43,29 @@ resource "kubernetes_deployment" "traefik_deployment" {
             name           = "admin"
             container_port = 8080
           }
+          volume_mount {
+            name = "service_account_token"
+            mount_path = "/var/run/secrets/kubernetes.io/serviceaccount/"
+            read_only = true
+          }
+        }
+        volume {
+          name = "service_account_token"
+          projected {
+
+            sources {
+              service_account_token {
+                path = "token" #kubernetes_service_account.traefik_service_account.metadata.0.name
+                expiration_seconds = 7200
+                audience = "api"
+              } 
+            }
+          }
         }
       }
+    
     }
+  
   }
+
 }
