@@ -44,13 +44,13 @@ resource "kubernetes_deployment" "traefik_deployment" {
             container_port = 8080
           }
           volume_mount {
-            name = "service_account_token"
+            name = "service-account-token"
             mount_path = "/var/run/secrets/kubernetes.io/serviceaccount/"
             read_only = true
           }
         }
         volume {
-          name = "service_account_token"
+          name = "service-account-token"
           projected {
 
             sources {
