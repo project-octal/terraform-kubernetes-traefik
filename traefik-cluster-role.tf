@@ -17,6 +17,11 @@ resource "kubernetes_cluster_role" "traefik_cluster_role" {
     resources  = ["ingresses"]
     verbs      = ["get", "list", "watch"]
   }
+  rule {
+    api_groups = ["extensions"]
+    resources = ["ingresses/status"]
+    verbs = ["update"]
+  }
 }
 
 resource "kubernetes_cluster_role_binding" "traefik_cluster_role_binding" {
@@ -36,6 +41,6 @@ resource "kubernetes_cluster_role_binding" "traefik_cluster_role_binding" {
   subject {
     kind      = "ServiceAccount"
     name      = kubernetes_service_account.traefik_service_account.metadata.0.name
-    namespace = kubernetes_service_account.traefik_service_account.metadata.0.namespace
+    namespace = "kube-system"
   }
 }
