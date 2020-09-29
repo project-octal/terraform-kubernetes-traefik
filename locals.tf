@@ -4,6 +4,11 @@ locals {
   }, var.labels)
 
   traefik_values = {
+    deployment = {
+      enabled     = true
+      replicas    = var.replicas
+      annotations = var.traefik_annotations
+    }
     service = {
       enabled                  = true
       type                     = "LoadBalancer"
@@ -13,16 +18,16 @@ locals {
       externalIPs              = []
     }
     ingressClass = {
-      enabled = true
+      enabled        = true
       isDefaultClass = true
     }
     ingressRoute = {
       dashboard = {
         enabled = true
-        annotations: {
-          kubernetes.io/ingress.class: "traefik"
+        annotations : {
+          "kubernetes.io/ingress.class" : "traefik"
         }
-        labels: {}
+        labels : {}
       }
     }
   }

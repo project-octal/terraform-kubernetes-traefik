@@ -14,7 +14,12 @@ variable "labels" {
 }
 variable "replicas" {
   type    = number
-  default = 1
+  default = 2
+}
+variable "traefik_annotations" {
+  type        = map(string)
+  description = "Additional Traefik deployment annotations (e.g. for `linkerd.io/inject: enabled` for mesh things)"
+  default     = {}
 }
 variable "image_pull_policy" {
   type        = string
