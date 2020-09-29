@@ -10,6 +10,6 @@ module "argocd-application" {
   repo_url           = var.chart_repo
   chart              = var.chart_name
   target_revision    = var.chart_version
-  #helm_values        = #local.traefik_values
-  #helm_parameters    = []
+  helm_values        = local.traefik_values
+  helm_parameters    = []
 }

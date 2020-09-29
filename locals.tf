@@ -4,14 +4,13 @@ locals {
   }, var.labels)
 
   traefik_values = {
-    image = {
-      name = "traefik"
-      tag = "2.3.0"
-      pullPolicy = "IfNotPresent"
-    }
-    deployment = {
+    service = {
       enabled = true
-      replicas = var.replicas
+      type = "LoadBalancer"
+      annotations = var.service_annotations
+      spec = {}
+      loadBalancerSourceRanges = var.service_source_ranges
+      externalIPs = []
     }
   }
 

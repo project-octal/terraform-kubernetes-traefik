@@ -26,3 +26,13 @@ variable "traefik_log_level" {
   description = "(optional) The level at Traefik should be logging at. Options are `INFO`, `DEBUG`, and `TRACE`."
   default     = "INFO"
 }
+variable "service_annotations" {
+  type = map(string)
+  description = "Additional Traefik service annotations (e.g. for cloud provider specific config)"
+  default = {}
+}
+variable "service_source_ranges" {
+  type = list(string)
+  description = "A list of IP addresses that will be allowed to communicate with this load balancer."
+  default = ["0.0.0.0/0"]
+}
