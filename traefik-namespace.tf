@@ -5,6 +5,7 @@ resource "kubernetes_namespace" "traefik_namespace" {
       "app.kubernetes.io/name" : var.namespace
       "app.kubernetes.io/component" : "namespace"
     }, local.labels)
-    annotations = {}
+    annotations = merge({
+    }, var.namespace_annotations)
   }
 }

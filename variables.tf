@@ -7,6 +7,11 @@ variable "namespace" {
   description = "(optional) The name given to the namespace in which Traefik will reside."
   default     = "kube-traefik"
 }
+variable "namespace_annotations" {
+  type = map(string)
+  description = "Additional Traefik namespace annotations (e.g. for `linkerd.io/inject: enabled` for mesh things)"
+  default = {}
+}
 variable "labels" {
   type        = map(string)
   description = "(optional) A map that consists of any additional labels that should be included with resources created by this module."
