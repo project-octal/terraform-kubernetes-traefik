@@ -5,12 +5,12 @@ locals {
 
   traefik_values = {
     service = {
-      enabled = true
-      type = "LoadBalancer"
-      annotations = var.service_annotations
-      spec = {}
+      enabled                  = true
+      type                     = "LoadBalancer"
+      annotations              = var.service_annotations
+      spec                     = {}
       loadBalancerSourceRanges = var.service_source_ranges
-      externalIPs = []
+      externalIPs              = []
     }
   }
 

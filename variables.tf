@@ -13,7 +13,7 @@ variable "labels" {
   default     = {}
 }
 variable "replicas" {
-  type = number
+  type    = number
   default = 1
 }
 variable "image_pull_policy" {
@@ -27,12 +27,12 @@ variable "traefik_log_level" {
   default     = "INFO"
 }
 variable "service_annotations" {
-  type = map(string)
+  type        = map(string)
   description = "Additional Traefik service annotations (e.g. for cloud provider specific config)"
-  default = {}
+  default     = {}
 }
 variable "service_source_ranges" {
-  type = list(string)
+  type        = list(string)
   description = "A list of IP addresses that will be allowed to communicate with this load balancer."
-  default = ["0.0.0.0/0"]
+  default     = ["0.0.0.0/0"]
 }

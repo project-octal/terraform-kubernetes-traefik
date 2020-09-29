@@ -7,14 +7,14 @@ variable "argocd_project" {
   description = "The name of the ArgoCD project that this application will belong to."
 }
 variable "chart_repo" {
-  type = string
+  type        = string
   description = "The repo to pull this Traefik chart from"
-  default = "https://containous.github.io/traefik-helm-chart"
+  default     = "https://containous.github.io/traefik-helm-chart"
 }
 variable "chart_name" {
-  type = string
+  type        = string
   description = "The name of the Traefik chart to install"
-  default = "traefik"
+  default     = "traefik"
 }
 variable "chart_version" {
   type        = string
