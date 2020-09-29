@@ -14,7 +14,7 @@ variable "chart_repo" {
 variable "chart_name" {
   type = string
   description = "The name of the Traefik chart to install"
-  default = "traefik/traefik"
+  default = "traefik"
 }
 variable "chart_version" {
   type        = string
