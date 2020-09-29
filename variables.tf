@@ -12,20 +12,9 @@ variable "labels" {
   description = "(optional) A map that consists of any additional labels that should be included with resources created by this module."
   default     = {}
 }
-variable "traefik_image" {
-  type        = string
-  description = "The image to use for the `traefik-ingress` deployment"
-  default     = "library/traefik"
-}
-variable "traefik_image_tag" {
-  type        = string
-  description = "The version of Traefik to deploy."
-  default     = "v2.3.0"
-}
-variable "image_repository" {
-  type        = string
-  description = "The image repository to use when pulling images."
-  default     = "registry.hub.docker.com"
+variable "replicas" {
+  type = number
+  default = 1
 }
 variable "image_pull_policy" {
   type        = string
