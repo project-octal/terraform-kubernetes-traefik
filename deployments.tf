@@ -109,12 +109,23 @@ resource "kubernetes_deployment" "deployment" {
             container_port = 8443
           }
           volume_mount {
+            name       = "service-token"
+            mount_path = "/var/run/secrets/kubernetes.io/serviceaccount/"
+            read_only  = true
+          }
+          volume_mount {
             name = "data"
             mount_path = "/data"
           }
           volume_mount {
             name = "tmp"
             mount_path = "/tmp"
+          }
+        }
+        volume {
+          name = "service-token"
+          secret {
+            secret_name = kubernetes_service_account.service_account.default_secret_name
           }
         }
         volume {
