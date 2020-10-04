@@ -48,7 +48,8 @@ resource "kubernetes_deployment" "deployment" {
             "--api.dashboard=true",
             "--ping=true",
             "--providers.kubernetescrd",
-            "--providers.kubernetesingress"
+            "--providers.kubernetesingress",
+            "--providers.kubernetesingress.ingressclass=traefik-internal"
           ]
           resources {
             requests {
