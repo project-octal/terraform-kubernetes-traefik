@@ -1,6 +1,7 @@
 resource "kubernetes_deployment" "deployment" {
   metadata {
     name = local.name
+    namespace = kubernetes_namespace.namespace.metadata.0.name
     labels = merge({
       "app.kubernetes.io/name": local.name
       "app.kubernetes.io/component": "deployment"
@@ -24,6 +25,7 @@ resource "kubernetes_deployment" "deployment" {
     template {
       metadata {
         name = local.name
+        namespace = kubernetes_namespace.namespace.metadata.0.name
         labels = merge({
           "app.kubernetes.io/name": local.name
           "app.kubernetes.io/component": "deployment"

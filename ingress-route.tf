@@ -3,11 +3,12 @@ locals {
     apiVersion = "traefik.containo.us/v1alpha1"
     kind = "IngressRoute"
     metadata = {
-      name: "${local.name}-dashboard"
+      name = "${local.name}-dashboard"
+      namespace = kubernetes_namespace.namespace.metadata.0.name
       labels = merge({
-        "app.kubernetes.io/part-of" : local.name
-        "app.kubernetes.io/instance": local.instance_id
-        "app.kubernetes.io/managed-by": "Terraform"
+        "app.kubernetes.io/part-of" = local.name
+        "app.kubernetes.io/instance" = local.instance_id
+        "app.kubernetes.io/managed-by" = "Terraform"
       }, var.labels)
     }
     spec = {
