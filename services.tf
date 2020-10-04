@@ -12,7 +12,7 @@ resource "kubernetes_service" "service" {
   }
   lifecycle {
     ignore_changes = [
-      "annotations.kubernetes.digitalocean.com/load-balancer-id"
+      metadata.0.annotations["kubernetes.digitalocean.com/load-balancer-id"]
     ]
   }
   spec {
