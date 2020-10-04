@@ -1,4 +1,4 @@
-resource "kubernetes_namespace" "traefik_namespace" {
+resource "kubernetes_namespace" "namespace" {
   metadata {
     name = var.namespace
     labels = merge({
@@ -6,6 +6,6 @@ resource "kubernetes_namespace" "traefik_namespace" {
       "app.kubernetes.io/component" : "namespace"
     }, local.labels)
     annotations = merge({
-    }, var.namespace_annotations)
+    }, var.annotations)
   }
 }
