@@ -49,7 +49,7 @@ resource "kubernetes_deployment" "deployment" {
             "--ping=true",
             "--providers.kubernetescrd",
             "--providers.kubernetesingress",
-            "--providers.kubernetesingress.ingressclass=traefik-internal"
+            "--providers.kubernetesingress.ingressclass=${local.ingress_class}"
           ]
           resources {
             requests {
