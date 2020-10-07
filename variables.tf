@@ -34,6 +34,11 @@ variable "labels" {
   default     = {}
 }
 
+variable "access_logs" {
+  type = bool
+  description = "Determines whether access logs will be kept."
+  default = "true"
+}
 
 variable "log_level" {
   type        = string

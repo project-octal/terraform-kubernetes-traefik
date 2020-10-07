@@ -42,10 +42,13 @@ resource "kubernetes_deployment" "deployment" {
           args = [
             "--global.checknewversion",
             "--global.sendanonymoususage",
+            "--serverstransport.insecureskipverify=true",
             "--entryPoints.traefik.address=:9000/tcp",
             "--entryPoints.web.address=:8000/tcp",
             "--entryPoints.websecure.address=:8443/tcp",
             "--api.dashboard=true",
+            "--log.level=${var.log_level}",
+            "--accesslog=${var.access_logs}",
             "--ping=true",
             "--providers.kubernetescrd",
             "--providers.kubernetesingress",
