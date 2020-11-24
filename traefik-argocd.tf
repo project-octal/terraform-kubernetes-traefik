@@ -1,5 +1,5 @@
 module "argocd-application" {
-  source             = "github.com/dylanturn/terraform-kubernetes-argocd-application"
+  source             = "github.com/project-octal/terraform-argocd-application"
   argocd_namespace   = var.argocd_namespace
   destination_server = "https://kubernetes.default.svc"
   name               = "traefik"
