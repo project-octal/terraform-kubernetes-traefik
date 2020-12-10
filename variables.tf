@@ -3,10 +3,15 @@ variable "namespace" {
   description = "(optional) The name given to the namespace in which Traefik will reside."
   default     = "kube-traefik"
 }
+#<<<<<<< HEAD
 variable "annotations" {
   type = map(string)
+#=======
+#variable "namespace_annotations" {
+#  type        = map(string)
+#>>>>>>> main
   description = "Additional Traefik namespace annotations (e.g. for `linkerd.io/inject: enabled` for mesh things)"
-  default = {}
+  default     = {}
 }
 variable "image_tag" {
   type = string
