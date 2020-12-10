@@ -6,22 +6,22 @@ variable "namespace" {
 #<<<<<<< HEAD
 variable "annotations" {
   type = map(string)
-#=======
-#variable "namespace_annotations" {
-#  type        = map(string)
-#>>>>>>> main
+  #=======
+  #variable "namespace_annotations" {
+  #  type        = map(string)
+  #>>>>>>> main
   description = "Additional Traefik namespace annotations (e.g. for `linkerd.io/inject: enabled` for mesh things)"
   default     = {}
 }
 variable "image_tag" {
-  type = string
+  type        = string
   description = "The version of Traefik to deploy"
-  default = "2.3.1"
+  default     = "2.3.1"
 }
 variable "image_name" {
-  type = string
+  type        = string
   description = "The image to use when deploying Traefik"
-  default = "library/traefik"
+  default     = "library/traefik"
 }
 variable "image_repository" {
   type        = string
@@ -40,9 +40,9 @@ variable "labels" {
 }
 
 variable "access_logs" {
-  type = bool
+  type        = bool
   description = "Determines whether access logs will be kept."
-  default = "true"
+  default     = "true"
 }
 
 variable "log_level" {
@@ -51,22 +51,22 @@ variable "log_level" {
   default     = "INFO"
 }
 variable "replicas" {
-  type    = number
+  type        = number
   description = ""
-  default = 2
+  default     = 2
 }
 variable "rolling_update_max_surge" {
-  type = number
+  type        = number
   description = ""
-  default = 1
+  default     = 1
 }
 variable "rolling_update_max_unavailable" {
-  type = number
+  type        = number
   description = ""
-  default = 1
+  default     = 1
 }
 variable "pod_termination_grace_period_seconds" {
-  type = number
+  type        = number
   description = ""
-  default = 60
+  default     = 60
 }

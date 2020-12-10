@@ -1,43 +1,43 @@
 resource "kubernetes_deployment" "deployment" {
   metadata {
-    name = local.name
+    name      = local.name
     namespace = kubernetes_namespace.namespace.metadata.0.name
     labels = merge({
-      "app.kubernetes.io/name": local.name
-      "app.kubernetes.io/component": "deployment"
+      "app.kubernetes.io/name" : local.name
+      "app.kubernetes.io/component" : "deployment"
     }, local.labels)
   }
   spec {
     replicas = var.replicas
     selector {
       match_labels = {
-        "app.kubernetes.io/name": local.name
-        "app.kubernetes.io/instance": local.instance_id
+        "app.kubernetes.io/name" : local.name
+        "app.kubernetes.io/instance" : local.instance_id
       }
     }
     strategy {
       type = "RollingUpdate"
       rolling_update {
-        max_surge = var.rolling_update_max_surge
+        max_surge       = var.rolling_update_max_surge
         max_unavailable = var.rolling_update_max_unavailable
       }
     }
     template {
       metadata {
-        name = local.name
+        name      = local.name
         namespace = kubernetes_namespace.namespace.metadata.0.name
         labels = merge({
-          "app.kubernetes.io/name": local.name
-          "app.kubernetes.io/component": "deployment"
+          "app.kubernetes.io/name" : local.name
+          "app.kubernetes.io/component" : "deployment"
         }, local.labels)
       }
       spec {
-        service_account_name = kubernetes_service_account.service_account.metadata.0.name
+        service_account_name             = kubernetes_service_account.service_account.metadata.0.name
         termination_grace_period_seconds = var.pod_termination_grace_period_seconds
-        host_network = false
+        host_network                     = false
         container {
-          name = local.name
-          image = "${var.image_repository}/${var.image_name}:${var.image_tag}"
+          name              = local.name
+          image             = "${var.image_repository}/${var.image_name}:${var.image_tag}"
           image_pull_policy = var.image_pull_policy
           args = [
             "--global.checknewversion",
@@ -56,11 +56,11 @@ resource "kubernetes_deployment" "deployment" {
           ]
           resources {
             requests {
-              cpu = "100m"
+              cpu    = "100m"
               memory = "50Mi"
             }
             limits {
-              cpu = "300m"
+              cpu    = "300m"
               memory = "150Mi"
             }
           }
@@ -69,22 +69,22 @@ resource "kubernetes_deployment" "deployment" {
               path = "/ping"
               port = 9000
             }
-            failure_threshold = 1
+            failure_threshold     = 1
             initial_delay_seconds = 10
-            period_seconds = 10
-            success_threshold = 1
-            timeout_seconds = 2
+            period_seconds        = 10
+            success_threshold     = 1
+            timeout_seconds       = 2
           }
           liveness_probe {
             http_get {
               path = "/ping"
               port = 9000
             }
-            failure_threshold = 3
+            failure_threshold     = 3
             initial_delay_seconds = 10
-            period_seconds = 10
-            success_threshold = 1
-            timeout_seconds = 2
+            period_seconds        = 10
+            success_threshold     = 1
+            timeout_seconds       = 2
           }
           security_context {
             capabilities {
@@ -93,23 +93,23 @@ resource "kubernetes_deployment" "deployment" {
               ]
             }
             read_only_root_filesystem = true
-            run_as_non_root = true
-            run_as_user = 65532
-            run_as_group = 65532
+            run_as_non_root           = true
+            run_as_user               = 65532
+            run_as_group              = 65532
           }
           port {
-            name = "traefik"
-            protocol = "TCP"
+            name           = "traefik"
+            protocol       = "TCP"
             container_port = 9000
           }
           port {
-            name = "web"
-            protocol = "TCP"
+            name           = "web"
+            protocol       = "TCP"
             container_port = 8000
           }
           port {
-            name = "websecure"
-            protocol = "TCP"
+            name           = "websecure"
+            protocol       = "TCP"
             container_port = 8443
           }
           volume_mount {
@@ -118,11 +118,11 @@ resource "kubernetes_deployment" "deployment" {
             read_only  = true
           }
           volume_mount {
-            name = "data"
+            name       = "data"
             mount_path = "/data"
           }
           volume_mount {
-            name = "tmp"
+            name       = "tmp"
             mount_path = "/tmp"
           }
         }

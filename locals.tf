@@ -1,11 +1,11 @@
 resource "random_pet" "instance_name" {}
 locals {
-  name = "traefik"
+  name          = "traefik"
   ingress_class = "traefik"
-  instance_id = random_pet.instance_name.id
+  instance_id   = random_pet.instance_name.id
   labels = merge({
-    "app.kubernetes.io/part-of" = local.name
-    "app.kubernetes.io/instance" = local.instance_id
+    "app.kubernetes.io/part-of"    = local.name
+    "app.kubernetes.io/instance"   = local.instance_id
     "app.kubernetes.io/managed-by" = "terraform"
   }, var.labels)
 }

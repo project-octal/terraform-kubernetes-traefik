@@ -1,13 +1,13 @@
 locals {
   dashboard_ingress_route = {
     apiVersion = "traefik.containo.us/v1alpha1"
-    kind = "IngressRoute"
+    kind       = "IngressRoute"
     metadata = {
-      name = "${local.name}-dashboard"
+      name      = "${local.name}-dashboard"
       namespace = kubernetes_namespace.namespace.metadata.0.name
       labels = merge({
-        "app.kubernetes.io/part-of" = local.name
-        "app.kubernetes.io/instance" = local.instance_id
+        "app.kubernetes.io/part-of"    = local.name
+        "app.kubernetes.io/instance"   = local.instance_id
         "app.kubernetes.io/managed-by" = "Terraform"
       }, var.labels)
     }
@@ -18,7 +18,7 @@ locals {
       routes = [
         {
           match = "PathPrefix(`/dashboard`) || PathPrefix(`/api`)"
-          kind = "Rule"
+          kind  = "Rule"
           services = [
             {
               name = "api@internal"
