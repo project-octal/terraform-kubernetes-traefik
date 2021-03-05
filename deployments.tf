@@ -55,11 +55,11 @@ resource "kubernetes_deployment" "deployment" {
             "--providers.kubernetesingress.ingressclass=${local.ingress_class}"
           ]
           resources {
-            requests {
+            requests = {
               cpu    = "100m"
               memory = "50Mi"
             }
-            limits {
+            limits = {
               cpu    = "300m"
               memory = "150Mi"
             }
