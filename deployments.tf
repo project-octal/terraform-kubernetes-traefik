@@ -32,6 +32,25 @@ resource "kubernetes_deployment" "deployment" {
         }, local.labels)
       }
       spec {
+
+        dynamic "affinity" {
+          for_each = var.preferred_node_selector
+          content {
+            node_affinity {
+              preferred_during_scheduling_ignored_during_execution {
+                weight = affinity.value["weight"]
+                preference {
+                  match_expressions {
+                    key = affinity.value["key"]
+                    operator = affinity.value["operator"]
+                    values = affinity.value["values"]
+                  }
+                }
+              }
+            }
+          }
+        }
+
         service_account_name             = kubernetes_service_account.service_account.metadata.0.name
         termination_grace_period_seconds = var.pod_termination_grace_period_seconds
         host_network                     = false

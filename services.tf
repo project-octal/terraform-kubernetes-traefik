@@ -8,7 +8,7 @@ resource "kubernetes_service" "service" {
     }, local.labels)
   }
   spec {
-    type = "LoadBalancer"
+    type = var.service_type
     selector = {
       "app.kubernetes.io/name"     = local.name
       "app.kubernetes.io/instance" = local.instance_id
