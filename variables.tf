@@ -85,5 +85,5 @@ variable "preferred_node_selector" {
     values = list(string)
   }))
   description = "A list of objects that define `preferredDuringSchedulingIgnoredDuringExecution` for this deployment"
-  default = null
+  default = []
 }
