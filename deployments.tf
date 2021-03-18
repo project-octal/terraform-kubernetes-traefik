@@ -53,6 +53,7 @@ resource "kubernetes_deployment" "deployment" {
 
         service_account_name             = kubernetes_service_account.service_account.metadata.0.name
         termination_grace_period_seconds = var.pod_termination_grace_period_seconds
+        automount_service_account_token  = false
         host_network                     = false
         container {
           name              = local.name
