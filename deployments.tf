@@ -41,9 +41,9 @@ resource "kubernetes_deployment" "deployment" {
                 weight = affinity.value["weight"]
                 preference {
                   match_expressions {
-                    key = affinity.value["key"]
+                    key      = affinity.value["key"]
                     operator = affinity.value["operator"]
-                    values = affinity.value["values"]
+                    values   = affinity.value["values"]
                   }
                 }
               }

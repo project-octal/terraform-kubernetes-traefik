@@ -72,18 +72,18 @@ variable "pod_termination_grace_period_seconds" {
 }
 
 variable "service_type" {
-  type = string
+  type        = string
   description = "The type used for this deployments service."
-  default = "LoadBalancer"
+  default     = "LoadBalancer"
 }
 
 variable "preferred_node_selector" {
   type = list(object({
-    weight = number,
-    key = string,
+    weight   = number,
+    key      = string,
     operator = string,
-    values = list(string)
+    values   = list(string)
   }))
   description = "A list of objects that define `preferredDuringSchedulingIgnoredDuringExecution` for this deployment"
-  default = []
+  default     = []
 }
