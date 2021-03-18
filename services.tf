@@ -6,17 +6,9 @@ resource "kubernetes_service" "service" {
       "app.kubernetes.io/name"      = local.name
       "app.kubernetes.io/component" = "service-account"
     }, local.labels)
-    annotations = {
-      "kubernetes.digitalocean.com/load-balancer-id" : ""
-    }
-  }
-  lifecycle {
-    ignore_changes = [
-      metadata.0.annotations["kubernetes.digitalocean.com/load-balancer-id"]
-    ]
   }
   spec {
-    type = "LoadBalancer"
+    type = var.service_type
     selector = {
       "app.kubernetes.io/name"     = local.name
       "app.kubernetes.io/instance" = local.instance_id

@@ -32,8 +32,28 @@ resource "kubernetes_deployment" "deployment" {
         }, local.labels)
       }
       spec {
+
+        dynamic "affinity" {
+          for_each = var.preferred_node_selector
+          content {
+            node_affinity {
+              preferred_during_scheduling_ignored_during_execution {
+                weight = affinity.value["weight"]
+                preference {
+                  match_expressions {
+                    key = affinity.value["key"]
+                    operator = affinity.value["operator"]
+                    values = affinity.value["values"]
+                  }
+                }
+              }
+            }
+          }
+        }
+
         service_account_name             = kubernetes_service_account.service_account.metadata.0.name
         termination_grace_period_seconds = var.pod_termination_grace_period_seconds
+        automount_service_account_token  = false
         host_network                     = false
         container {
           name              = local.name
@@ -51,15 +71,15 @@ resource "kubernetes_deployment" "deployment" {
             "--accesslog=${var.access_logs}",
             "--ping=true",
             "--providers.kubernetescrd",
-            "--providers.kubernetesingress",
+            "--providers.kubernetesingress=true",
             "--providers.kubernetesingress.ingressclass=${local.ingress_class}"
           ]
           resources {
-            requests {
+            requests = {
               cpu    = "100m"
               memory = "50Mi"
             }
-            limits {
+            limits = {
               cpu    = "300m"
               memory = "150Mi"
             }
