@@ -4,6 +4,8 @@ resource "kubernetes_namespace" "namespace" {
     labels = merge({
       "app.kubernetes.io/name"      = var.namespace
       "app.kubernetes.io/component" = "namespace"
+      "app.kubernetes.io/instance"   = local.instance_id
+      "app.kubernetes.io/managed-by" = "Terraform"
     }, local.labels)
     annotations = merge({
     }, var.annotations)

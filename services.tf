@@ -5,6 +5,8 @@ resource "kubernetes_service" "service" {
     labels = merge({
       "app.kubernetes.io/name"      = local.name
       "app.kubernetes.io/component" = "service-account"
+      "app.kubernetes.io/instance"   = local.instance_id
+      "app.kubernetes.io/managed-by" = "Terraform"
     }, local.labels)
   }
   spec {

@@ -5,6 +5,8 @@ resource "kubernetes_deployment" "deployment" {
     labels = merge({
       "app.kubernetes.io/name" : local.name
       "app.kubernetes.io/component" : "deployment"
+      "app.kubernetes.io/instance"   = local.instance_id
+      "app.kubernetes.io/managed-by" = "Terraform"
     }, local.labels)
   }
   spec {
@@ -29,6 +31,8 @@ resource "kubernetes_deployment" "deployment" {
         labels = merge({
           "app.kubernetes.io/name" : local.name
           "app.kubernetes.io/component" : "deployment"
+          "app.kubernetes.io/instance"   = local.instance_id
+          "app.kubernetes.io/managed-by" = "Terraform"
         }, local.labels)
       }
       spec {
