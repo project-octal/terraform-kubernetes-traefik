@@ -2,8 +2,8 @@ resource "kubernetes_cluster_role_binding" "cluster_role_binding" {
   metadata {
     name = "traefik"
     labels = merge({
-      "app.kubernetes.io/name"      = "traefik"
-      "app.kubernetes.io/component" = "cluster-role-binding"
+      "app.kubernetes.io/name"       = "traefik"
+      "app.kubernetes.io/component"  = "cluster-role-binding"
       "app.kubernetes.io/instance"   = local.instance_id
       "app.kubernetes.io/managed-by" = "Terraform"
     }, local.labels)

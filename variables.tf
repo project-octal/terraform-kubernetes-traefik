@@ -4,7 +4,7 @@ variable "namespace" {
   default     = "kube-traefik"
 }
 variable "annotations" {
-  type = map(string)
+  type        = map(string)
   description = "Additional Traefik namespace annotations (e.g. for `linkerd.io/inject: enabled` for mesh things)"
   default     = {}
 }

@@ -5,10 +5,10 @@ locals {
     metadata = {
       name = local.ingress_class
       annotations = {
-        ingressclass.kubernetes.io/is-default-class = true
+        "ingressclass.kubernetes.io/is-default-class" = true
       }
       labels = {
-        app.kubernetes.io/name: local.ingress_class
+        "app.kubernetes.io/name" : local.ingress_class
         "app.kubernetes.io/instance"   = local.instance_id
         "app.kubernetes.io/managed-by" = "Terraform"
       }
