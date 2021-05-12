@@ -75,7 +75,7 @@ resource "kubernetes_deployment" "deployment" {
             "--accesslog=${var.access_logs}",
             "--ping=true",
             "--providers.kubernetescrd",
-            "--providers.kubernetesingress=true",
+            "--providers.kubernetesingress",
             "--providers.kubernetesingress.ingressclass=${local.ingress_class}"
           ]
           resources {
