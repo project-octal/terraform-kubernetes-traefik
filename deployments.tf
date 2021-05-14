@@ -1,11 +1,14 @@
+
+
 resource "kubernetes_deployment" "deployment" {
   metadata {
     name      = local.name
     namespace = kubernetes_namespace.namespace.metadata.0.name
     labels = merge({
-      "app.kubernetes.io/name" : local.name
-      "app.kubernetes.io/component" : "deployment"
+      "app.kubernetes.io/name"       = local.name
+      "app.kubernetes.io/component"  = "deployment"
       "app.kubernetes.io/instance"   = local.instance_id
+      "app.kubernetes.io/part-of"    = local.name
       "app.kubernetes.io/managed-by" = "Terraform"
     }, local.labels)
   }
@@ -29,9 +32,10 @@ resource "kubernetes_deployment" "deployment" {
         name      = local.name
         namespace = kubernetes_namespace.namespace.metadata.0.name
         labels = merge({
-          "app.kubernetes.io/name" : local.name
-          "app.kubernetes.io/component" : "deployment"
+          "app.kubernetes.io/name"       = local.name
+          "app.kubernetes.io/component"  = "deployment"
           "app.kubernetes.io/instance"   = local.instance_id
+          "app.kubernetes.io/part-of"    = local.name
           "app.kubernetes.io/managed-by" = "Terraform"
         }, local.labels)
       }
@@ -67,25 +71,25 @@ resource "kubernetes_deployment" "deployment" {
             "--global.checknewversion",
             "--global.sendanonymoususage",
             "--serverstransport.insecureskipverify=true",
-            "--entryPoints.traefik.address=:9000/tcp",
+            "%{if var.enable_dashboard}--entryPoints.traefik.address=:9000/tcp%{endif}!",
             "--entryPoints.web.address=:8000/tcp",
             "--entryPoints.websecure.address=:8443/tcp",
-            "--api.dashboard=true",
+            "--api.dashboard=${var.enable_dashboard}",
             "--log.level=${var.log_level}",
             "--accesslog=${var.access_logs}",
             "--ping=true",
             "--providers.kubernetescrd",
             "--providers.kubernetesingress",
-            "--providers.kubernetesingress.ingressclass=${local.ingress_class_name}"
+            "--providers.kubernetesingress.ingressclass=${var.ingress_class_name}"
           ]
           resources {
             requests = {
-              cpu    = "100m"
-              memory = "50Mi"
+              cpu    = local.cpu_request
+              memory = local.memory_request
             }
             limits = {
-              cpu    = "300m"
-              memory = "150Mi"
+              cpu    = local.cpu_limit
+              memory = local.memory_limit
             }
           }
           readiness_probe {
