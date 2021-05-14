@@ -11,7 +11,7 @@ variable "annotations" {
 variable "image_tag" {
   type        = string
   description = "The version of Traefik to deploy"
-  default     = "2.3.1"
+  default     = "2.4.8"
 }
 variable "image_name" {
   type        = string
