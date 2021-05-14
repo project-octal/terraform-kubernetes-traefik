@@ -5,12 +5,12 @@ locals {
     apiVersion = "networking.k8s.io/v1"
     kind       = "IngressClass"
     metadata = {
-      name = local.ingress_class
+      name = local.ingress_class_name
       annotations = {
         "ingressclass.kubernetes.io/is-default-class" = true
       }
       labels = {
-        "app.kubernetes.io/name" : local.ingress_class
+        "app.kubernetes.io/name" : local.ingress_class_name
         "app.kubernetes.io/instance"   = local.instance_id
         "app.kubernetes.io/managed-by" = "Terraform"
       }
