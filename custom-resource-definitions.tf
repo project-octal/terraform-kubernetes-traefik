@@ -19,3 +19,6 @@ resource "k8s_manifest" "tls_stores" {
 resource "k8s_manifest" "traefik_services" {
   content = templatefile("${path.module}/custom-resource-definitions/traefikservices.yaml", {})
 }
+resource "k8s_manifest" "server_transports" {
+  content = templatefile("${path.module}/custom-resource-definitions/serverstransports.yaml", {})
+}

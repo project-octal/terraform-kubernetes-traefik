@@ -1,5 +1,7 @@
+
+
 locals {
-  dashboard_ingress_route = {
+  ingress_class = {
     apiVersion = "networking.k8s.io/v1"
     kind       = "IngressClass"
     metadata = {
@@ -20,6 +22,7 @@ locals {
 }
 
 
+
 # resource "k8s_manifest" "dashboard_ingress_route" {
 #   depends_on = [
 #     k8s_manifest.ingress_route,
@@ -31,4 +34,4 @@ locals {
 #     k8s_manifest.traefik_services
 #   ]
 #   content = yamlencode(local.dashboard_ingress_route)
-# }
+# } 
