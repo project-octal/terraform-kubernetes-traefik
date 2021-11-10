@@ -1,7 +1,7 @@
 resource "random_pet" "instance_name" {}
 locals {
 
-  name = "traefik"
+  name        = "traefik"
   instance_id = random_pet.instance_name.id
 
   cpu_request    = var.resource_requests.cpu == null ? "100m" : var.resource_requests.cpu
