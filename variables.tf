@@ -11,7 +11,7 @@ variable "annotations" {
 variable "image_tag" {
   type        = string
   description = "The version of Traefik to deploy"
-  default     = "2.3.1"
+  default     = "2.4.8"
 }
 variable "image_name" {
   type        = string
@@ -81,4 +81,47 @@ variable "preferred_node_selector" {
   }))
   description = "A list of objects that define `preferredDuringSchedulingIgnoredDuringExecution` for this deployment"
   default     = []
+}
+
+variable "enable_dashboard" {
+  type        = string
+  description = "Set to `true` to enable the Traefik dashboard"
+  default     = true
+}
+
+variable "dashboard_ingress_host" {
+  type        = string
+  description = "The Traefik dashboard ingress host"
+  default     = null
+}
+
+variable "resource_requests" {
+  type = object({
+    cpu    = optional(string),
+    memory = optional(string)
+  })
+  description = "Resource requests for the Traefik deployment pods"
+  default     = {}
+}
+
+variable "resource_limits" {
+  type = object({
+    cpu    = optional(string),
+    memory = optional(string)
+  })
+  description = "Resource limits for the Traefik deployment pods"
+  default     = {}
+}
+
+
+variable "ingress_class_name" {
+  type        = string
+  description = "The name of the Traefik ingress class"
+  default     = "traefik"
+}
+
+variable "ingress_class_default" {
+  type        = bool
+  description = "Set to true to make the ingress class of this Traefik instance the default."
+  default     = true
 }

@@ -62,7 +62,7 @@ resource "kubernetes_cluster_role" "cluster_role" {
       "tlsoptions",
       "tlsstores",
       "traefikservices",
-      "serverstransports" # for 2.4
+      "serverstransports"
     ]
     verbs = [
       "get",
