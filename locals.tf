@@ -2,7 +2,6 @@ resource "random_pet" "instance_name" {}
 
 locals {
   name          = "traefik"
-  ingress_class_name = "traefik"
   instance_id   = random_pet.instance_name.id
   labels = merge({
     "app.kubernetes.io/part-of"    = local.name
