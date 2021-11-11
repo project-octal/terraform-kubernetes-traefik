@@ -1,4 +1,4 @@
-![Alt text](docs/images/project-octal-traefik.svg "Project Octal Traefik")
+![Project Octal: Traefik](docs/images/project-octal-traefik.svg "Project Octal: Traefik")
 ---
 
 Simplifies the deployment and management of Traefik on a Kubernetes cluster.
