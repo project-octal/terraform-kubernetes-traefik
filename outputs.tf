@@ -10,5 +10,5 @@ output "ingress_class" {
     k8s_manifest.ingress_route_tcp,
     k8s_manifest.ingress_route
   ]
-  value = local.ingress_class
+  value = var.ingress_class_name
 }
