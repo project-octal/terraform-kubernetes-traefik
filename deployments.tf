@@ -71,7 +71,7 @@ resource "kubernetes_deployment" "deployment" {
             "--global.checknewversion",
             "--global.sendanonymoususage",
             "--serverstransport.insecureskipverify=true",
-            "%{if var.enable_dashboard}--entryPoints.traefik.address=:9000/tcp%{endif}!",
+            "%{if var.enable_dashboard}--entryPoints.traefik.address=:9000/tcp%{endif}",
             "--entryPoints.web.address=:8000/tcp",
             "--entryPoints.websecure.address=:8443/tcp",
             "--api.dashboard=${var.enable_dashboard}",
