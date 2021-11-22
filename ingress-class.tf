@@ -4,9 +4,6 @@ locals {
     kind       = "IngressClass"
     metadata = {
       name = var.ingress_class_name
-      annotations = {
-        "ingressclass.kubernetes.io/is-default-class" = var.ingress_class_default
-      }
       labels = merge({
         "app.kubernetes.io/name"       = var.ingress_class_name
         "app.kubernetes.io/component"  = "ingressclass"
@@ -20,6 +17,8 @@ locals {
     }
   }
 }
+
+
 
 resource "k8s_manifest" "ingress_class" {
   depends_on = [
