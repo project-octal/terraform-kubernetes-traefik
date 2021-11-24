@@ -8,9 +8,6 @@ Simplifies the deployment and management of Traefik on a Kubernetes cluster.
 - Add support for newer Traefik releases
 
 ## v0.0.2 to v1.0.0 Upgrade
-```terraform
-```
-
 ```shell
 
 # Import the Traefik dashboard if one was deployed
