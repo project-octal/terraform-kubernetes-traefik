@@ -2,13 +2,13 @@ output "ingress_class" {
   # Make sure we're avoiding any race conditions here.
   depends_on = [
     kubernetes_deployment.deployment,
-    k8s_manifest.traefik_services,
-    k8s_manifest.tls_stores,
-    k8s_manifest.tls_options,
-    k8s_manifest.middlewares,
-    k8s_manifest.ingress_route_udp,
-    k8s_manifest.ingress_route_tcp,
-    k8s_manifest.ingress_route
+    kubernetes_manifest.traefik_services,
+    kubernetes_manifest.tls_stores,
+    kubernetes_manifest.tls_options,
+    kubernetes_manifest.middlewares,
+    kubernetes_manifest.ingress_route_udp,
+    kubernetes_manifest.ingress_route_tcp,
+    kubernetes_manifest.ingress_route
   ]
   value = var.ingress_class_name
 }

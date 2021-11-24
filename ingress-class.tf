@@ -1,5 +1,14 @@
-locals {
-  ingress_class = {
+resource "kubernetes_manifest" "ingress_class" {
+  depends_on = [
+    kubernetes_manifest.ingress_route,
+    kubernetes_manifest.ingress_route_tcp,
+    kubernetes_manifest.ingress_route_udp,
+    kubernetes_manifest.middlewares,
+    kubernetes_manifest.tls_options,
+    kubernetes_manifest.tls_stores,
+    kubernetes_manifest.traefik_services
+  ]
+  manifest = {
     apiVersion = "networking.k8s.io/v1"
     kind       = "IngressClass"
     metadata = {
@@ -16,19 +25,4 @@ locals {
       controller = "traefik.io/ingress-controller"
     }
   }
-}
-
-
-
-resource "k8s_manifest" "ingress_class" {
-  depends_on = [
-    k8s_manifest.ingress_route,
-    k8s_manifest.ingress_route_tcp,
-    k8s_manifest.ingress_route_udp,
-    k8s_manifest.middlewares,
-    k8s_manifest.tls_options,
-    k8s_manifest.tls_stores,
-    k8s_manifest.traefik_services
-  ]
-  content = yamlencode(local.ingress_class)
 } 

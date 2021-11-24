@@ -1,5 +1,17 @@
-locals {
-  dashboard_ingress_route = {
+resource "kubernetes_manifest" "dashboard_ingress_route" {
+  count = var.enable_dashboard ? 1 : 0
+
+  depends_on = [
+    kubernetes_manifest.ingress_route,
+    kubernetes_manifest.ingress_route_tcp,
+    kubernetes_manifest.ingress_route_udp,
+    kubernetes_manifest.middlewares,
+    kubernetes_manifest.tls_options,
+    kubernetes_manifest.tls_stores,
+    kubernetes_manifest.traefik_services
+  ]
+
+  manifest = {
     apiVersion = "traefik.containo.us/v1alpha1"
     kind       = "IngressRoute"
     metadata = {
@@ -31,18 +43,4 @@ locals {
       ]
     }
   }
-}
-
-resource "k8s_manifest" "dashboard_ingress_route" {
-  count = var.enable_dashboard ? 1 : 0
-  depends_on = [
-    k8s_manifest.ingress_route,
-    k8s_manifest.ingress_route_tcp,
-    k8s_manifest.ingress_route_udp,
-    k8s_manifest.middlewares,
-    k8s_manifest.tls_options,
-    k8s_manifest.tls_stores,
-    k8s_manifest.traefik_services
-  ]
-  content = yamlencode(local.dashboard_ingress_route)
 }
