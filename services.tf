@@ -1,7 +1,9 @@
+
 resource "kubernetes_service" "service" {
   metadata {
-    name      = local.name
-    namespace = kubernetes_namespace.namespace.metadata.0.name
+    name        = local.name
+    namespace   = kubernetes_namespace.namespace.metadata.0.name
+    annotations = {}
     labels = merge({
       "app.kubernetes.io/name"       = local.name
       "app.kubernetes.io/component"  = "service-account"

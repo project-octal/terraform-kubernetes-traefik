@@ -8,6 +8,11 @@ variable "annotations" {
   description = "Additional Traefik namespace annotations (e.g. for `linkerd.io/inject: enabled` for mesh things)"
   default     = {}
 }
+variable "service_annotations" {
+  type        = map(string)
+  description = "Additional Traefik service annotations (e.g. `service.beta.kubernetes.io/aws-load-balancer-type: external`)"
+  default     = {}
+}
 variable "image_tag" {
   type        = string
   description = "The version of Traefik to deploy"
