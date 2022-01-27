@@ -10,6 +10,9 @@ resource "kubernetes_manifest" "ingress_route_udp" {
 resource "kubernetes_manifest" "middlewares" {
   manifest = yamldecode(templatefile("${path.module}/custom-resource-definitions/middlewares.yaml", {}))
 }
+resource "kubernetes_manifest" "middlewares_tcp" {
+  manifest = yamldecode(templatefile("${path.module}/custom-resource-definitions/middlewarestcp.yaml", {}))
+}
 resource "kubernetes_manifest" "tls_options" {
   manifest = yamldecode(templatefile("${path.module}/custom-resource-definitions/tlsoptions.yaml", {}))
 }
