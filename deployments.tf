@@ -71,16 +71,16 @@ resource "kubernetes_deployment" "deployment" {
             "--global.checknewversion",
             "--global.sendanonymoususage",
             "--serverstransport.insecureskipverify=true",
-            "%{if var.enable_dashboard}--entryPoints.traefik.address=:9000/tcp%{endif}",
             "--entryPoints.web.address=:8000/tcp",
             "--entryPoints.websecure.address=:8443/tcp",
-            "--api.dashboard=${var.enable_dashboard}",
             "--log.level=${var.log_level}",
             "--accesslog=${var.access_logs}",
             "--ping=true",
             "--providers.kubernetescrd",
             "--providers.kubernetesingress",
-            "--providers.kubernetesingress.ingressclass=${var.ingress_class_name}"
+            "--providers.kubernetesingress.ingressclass=${var.ingress_class_name}",
+            "--api.dashboard=${var.enable_dashboard}",
+            "%{if var.enable_dashboard}--entryPoints.traefik.address=:9000/tcp%{endif}"
           ]
           resources {
             requests = {
