@@ -73,14 +73,14 @@ resource "kubernetes_deployment" "deployment" {
             "--serverstransport.insecureskipverify=true",
             "--entryPoints.web.address=:8000/tcp",
             "--entryPoints.websecure.address=:8443/tcp",
+            "--entryPoints.traefik.address=:9000/tcp",
             "--log.level=${var.log_level}",
             "--accesslog=${var.access_logs}",
             "--ping=true",
             "--providers.kubernetescrd",
             "--providers.kubernetesingress",
             "--providers.kubernetesingress.ingressclass=${var.ingress_class_name}",
-            "--api.dashboard=${var.enable_dashboard}",
-            "%{if var.enable_dashboard}--entryPoints.traefik.address=:9000/tcp%{endif}"
+            "--api.dashboard=${var.enable_dashboard}"
           ]
           resources {
             requests = {
