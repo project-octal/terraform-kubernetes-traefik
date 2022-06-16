@@ -41,6 +41,24 @@ resource "kubernetes_deployment" "deployment" {
       }
       spec {
 
+        affinity {
+          pod_anti_affinity {
+            preferred_during_scheduling_ignored_during_execution {
+              weight = 100
+              pod_affinity_term {
+                topology_key = "kubernetes.io/hostname"
+                label_selector {
+                  match_expressions {
+                    values   = [local.name]
+                    operator = "In"
+                    key      = "app.kubernetes.io/name"
+                  }
+                }
+              }
+            }
+          }
+        }
+
         dynamic "affinity" {
           for_each = var.preferred_node_selector
           content {
