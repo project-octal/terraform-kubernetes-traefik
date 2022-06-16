@@ -91,7 +91,7 @@ variable "preferred_node_selector" {
 variable "enable_dashboard" {
   type        = string
   description = "Set to `true` to enable the Traefik dashboard"
-  default     = true
+  default     = false
 }
 
 variable "dashboard_ingress_host" {
