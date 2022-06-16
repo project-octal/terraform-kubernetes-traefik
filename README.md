@@ -82,14 +82,14 @@ terraform apply -var-file secrets.tfvars
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14.8, < 2.0.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.6.1 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.8.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | ~> 2.6.1 |
-| <a name="provider_random"></a> [random](#provider\_random) | n/a |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.6.1 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.1.0 |
 
 ## Modules
 
@@ -108,6 +108,7 @@ No modules.
 | [kubernetes_manifest.ingress_route_tcp](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 | [kubernetes_manifest.ingress_route_udp](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 | [kubernetes_manifest.middlewares](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
+| [kubernetes_manifest.middlewares_tcp](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 | [kubernetes_manifest.server_transports](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 | [kubernetes_manifest.tls_options](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 | [kubernetes_manifest.tls_stores](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
@@ -128,7 +129,7 @@ No modules.
 | <a name="input_image_name"></a> [image\_name](#input\_image\_name) | The image to use when deploying Traefik | `string` | `"library/traefik"` | no |
 | <a name="input_image_pull_policy"></a> [image\_pull\_policy](#input\_image\_pull\_policy) | Determines when the image should be pulled prior to starting the container. `Always`: Always pull the image. \| `IfNotPresent`: Only pull the image if it does not already exist on the node. \| `Never`: Never pull the image | `string` | `"Always"` | no |
 | <a name="input_image_repository"></a> [image\_repository](#input\_image\_repository) | The image repository to use when pulling images | `string` | `"registry.hub.docker.com"` | no |
-| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | The version of Traefik to deploy | `string` | `"2.4.8"` | no |
+| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | The version of Traefik to deploy | `string` | `"2.7.1"` | no |
 | <a name="input_ingress_class_default"></a> [ingress\_class\_default](#input\_ingress\_class\_default) | Set to true to make the ingress class of this Traefik instance the default. | `bool` | `true` | no |
 | <a name="input_ingress_class_name"></a> [ingress\_class\_name](#input\_ingress\_class\_name) | The name of the Traefik ingress class | `string` | `"traefik"` | no |
 | <a name="input_labels"></a> [labels](#input\_labels) | (optional) A map that consists of any additional labels that should be included with resources created by this module. | `map(string)` | `{}` | no |
@@ -141,6 +142,7 @@ No modules.
 | <a name="input_resource_requests"></a> [resource\_requests](#input\_resource\_requests) | Resource requests for the Traefik deployment pods | <pre>object({<br>    cpu    = optional(string),<br>    memory = optional(string)<br>  })</pre> | `{}` | no |
 | <a name="input_rolling_update_max_surge"></a> [rolling\_update\_max\_surge](#input\_rolling\_update\_max\_surge) | n/a | `number` | `1` | no |
 | <a name="input_rolling_update_max_unavailable"></a> [rolling\_update\_max\_unavailable](#input\_rolling\_update\_max\_unavailable) | n/a | `number` | `1` | no |
+| <a name="input_service_annotations"></a> [service\_annotations](#input\_service\_annotations) | Additional Traefik service annotations (e.g. `service.beta.kubernetes.io/aws-load-balancer-type: external`) | `map(string)` | `{}` | no |
 | <a name="input_service_type"></a> [service\_type](#input\_service\_type) | The type used for this deployments service. | `string` | `"LoadBalancer"` | no |
 
 ## Outputs

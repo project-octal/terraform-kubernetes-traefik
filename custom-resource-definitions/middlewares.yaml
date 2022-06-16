@@ -2,7 +2,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.4.1
+    controller-gen.kubebuilder.io/version: v0.6.2
+  creationTimestamp: null
   name: middlewares.traefik.containo.us
 spec:
   group: traefik.containo.us
@@ -98,6 +99,8 @@ spec:
                     items:
                       type: string
                     type: array
+                  minResponseBodyBytes:
+                    type: integer
                 type: object
               contentType:
                 description: ContentType middleware - or rather its unique `autoDetect`
@@ -395,8 +398,9 @@ spec:
                       info configuration.
                     properties:
                       issuer:
-                        description: TLSCLientCertificateDNInfo holds the client TLS
-                          certificate distinguished name info configuration. cf https://tools.ietf.org/html/rfc3739
+                        description: TLSClientCertificateIssuerDNInfo holds the client
+                          TLS certificate distinguished name info configuration. cf
+                          https://tools.ietf.org/html/rfc3739
                         properties:
                           commonName:
                             type: boolean
@@ -422,8 +426,9 @@ spec:
                       serialNumber:
                         type: boolean
                       subject:
-                        description: TLSCLientCertificateDNInfo holds the client TLS
-                          certificate distinguished name info configuration. cf https://tools.ietf.org/html/rfc3739
+                        description: TLSClientCertificateSubjectDNInfo holds the client
+                          TLS certificate distinguished name info configuration. cf
+                          https://tools.ietf.org/html/rfc3739
                         properties:
                           commonName:
                             type: boolean
@@ -434,6 +439,8 @@ spec:
                           locality:
                             type: boolean
                           organization:
+                            type: boolean
+                          organizationalUnit:
                             type: boolean
                           province:
                             type: boolean

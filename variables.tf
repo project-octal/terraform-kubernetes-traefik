@@ -16,7 +16,7 @@ variable "service_annotations" {
 variable "image_tag" {
   type        = string
   description = "The version of Traefik to deploy"
-  default     = "2.4.8"
+  default     = "2.7.1"
 }
 variable "image_name" {
   type        = string
@@ -102,20 +102,26 @@ variable "dashboard_ingress_host" {
 
 variable "resource_requests" {
   type = object({
-    cpu    = optional(string),
-    memory = optional(string)
+    cpu    = string,
+    memory = string
   })
   description = "Resource requests for the Traefik deployment pods"
-  default     = {}
+  default = {
+    cpu    = null,
+    memory = null
+  }
 }
 
 variable "resource_limits" {
   type = object({
-    cpu    = optional(string),
-    memory = optional(string)
+    cpu    = string,
+    memory = string
   })
   description = "Resource limits for the Traefik deployment pods"
-  default     = {}
+  default = {
+    cpu    = null,
+    memory = null
+  }
 }
 
 

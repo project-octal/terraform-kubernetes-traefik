@@ -3,8 +3,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "~> 2.8.0"
+      version = ">= 2.8.0"
     }
   }
-  experiments = [module_variable_optional_attrs]
 }
