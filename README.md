@@ -82,14 +82,14 @@ terraform apply -var-file secrets.tfvars
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14.8, < 2.0.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.8.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.8.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.6.1 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.1.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.11.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.3.1 |
 
 ## Modules
 
@@ -138,8 +138,8 @@ No modules.
 | <a name="input_pod_termination_grace_period_seconds"></a> [pod\_termination\_grace\_period\_seconds](#input\_pod\_termination\_grace\_period\_seconds) | n/a | `number` | `60` | no |
 | <a name="input_preferred_node_selector"></a> [preferred\_node\_selector](#input\_preferred\_node\_selector) | A list of objects that define `preferredDuringSchedulingIgnoredDuringExecution` for this deployment | <pre>list(object({<br>    weight   = number,<br>    key      = string,<br>    operator = string,<br>    values   = list(string)<br>  }))</pre> | `[]` | no |
 | <a name="input_replicas"></a> [replicas](#input\_replicas) | n/a | `number` | `2` | no |
-| <a name="input_resource_limits"></a> [resource\_limits](#input\_resource\_limits) | Resource limits for the Traefik deployment pods | <pre>object({<br>    cpu    = optional(string),<br>    memory = optional(string)<br>  })</pre> | `{}` | no |
-| <a name="input_resource_requests"></a> [resource\_requests](#input\_resource\_requests) | Resource requests for the Traefik deployment pods | <pre>object({<br>    cpu    = optional(string),<br>    memory = optional(string)<br>  })</pre> | `{}` | no |
+| <a name="input_resource_limits"></a> [resource\_limits](#input\_resource\_limits) | Resource limits for the Traefik deployment pods | <pre>object({<br>    cpu    = string,<br>    memory = string<br>  })</pre> | <pre>{<br>  "cpu": null,<br>  "memory": null<br>}</pre> | no |
+| <a name="input_resource_requests"></a> [resource\_requests](#input\_resource\_requests) | Resource requests for the Traefik deployment pods | <pre>object({<br>    cpu    = string,<br>    memory = string<br>  })</pre> | <pre>{<br>  "cpu": null,<br>  "memory": null<br>}</pre> | no |
 | <a name="input_rolling_update_max_surge"></a> [rolling\_update\_max\_surge](#input\_rolling\_update\_max\_surge) | n/a | `number` | `1` | no |
 | <a name="input_rolling_update_max_unavailable"></a> [rolling\_update\_max\_unavailable](#input\_rolling\_update\_max\_unavailable) | n/a | `number` | `1` | no |
 | <a name="input_service_annotations"></a> [service\_annotations](#input\_service\_annotations) | Additional Traefik service annotations (e.g. `service.beta.kubernetes.io/aws-load-balancer-type: external`) | `map(string)` | `{}` | no |
